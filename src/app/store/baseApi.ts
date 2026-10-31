@@ -3,7 +3,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "https://api.yeatwork.ru/" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "/api/" }),
   tagTypes: ['Questions', 'Skills', 'Specs'],
   endpoints: () => ({}),
 });
