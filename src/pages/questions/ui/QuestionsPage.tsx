@@ -14,6 +14,7 @@ export function QuestionsPage() {
     rate: searchParams.get("rate") || "",
   };
 
+
   return (
     <>
       <Content page={page} filters={filters} searchValue={searchValue} />

@@ -7,10 +7,10 @@ export function QuestionList({
   questions: Array<Question>;
 }) {
   return (
-    <>
+    <ul style={{ listStyle: "none", padding: 0 }}>
       {questions.map((question) => (
         <QuestionCard key={question.id} question={question} />
       ))}
-    </>
+    </ul>
   );
 }
