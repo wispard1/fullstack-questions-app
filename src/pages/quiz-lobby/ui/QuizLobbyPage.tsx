@@ -13,6 +13,7 @@ import {
   type QuizConfigState,
 } from "@/features/quiz";
 import { useNavigate } from "react-router-dom";
+import type { SelectOption } from "@/shared/types";
 
 export function QuizLobbyPage() {
   const { data: specs = [] } = useGetSpecsQuery();
@@ -23,6 +24,19 @@ export function QuizLobbyPage() {
     (state: { quizConfig: QuizConfigState }) => state.quizConfig
   );
   const dispatch = useDispatch();
+
+  const getSelectedIds = (
+    value: SelectOption | SelectOption[] | null | string | number
+  ): string[] => {
+    if (!value) return [];
+    if (Array.isArray(value)) {
+      return value.map((item) => String(item.id));
+    }
+    if (typeof value === "object") {
+      return [String(value.id)];
+    }
+    return [String(value)];
+  };
 
   function handleStartQuiz() {
     if (!state.spec) {
@@ -41,17 +55,30 @@ export function QuizLobbyPage() {
             items={specs}
             title={"Специализация"}
             limit={5}
-            listType={"spec"}
-            selectedValue={state.spec}
-            onSelect={(item) => dispatch(setSpec(item))}
+            selectedValues={getSelectedIds(state.spec)}
+            onSelect={(id) => {
+              const selectedSpec = specs.find((s) => String(s.id) === id) || null;
+              dispatch(setSpec(selectedSpec));
+            }}
           />
           <CollapsibleList
             items={skills}
             title={"Выберите навыки"}
             limit={5}
-            listType={"skill"}
-            selectedValue={state.skills}
-            onSelect={(item) => dispatch(setSkills(item))}
+            showIcon={true}
+            selectedValues={getSelectedIds(state.skills)}
+            onSelect={(id) => {
+              const selectedSkill = skills.find((s) => String(s.id) === id);
+              if (!selectedSkill) return;
+
+              const isSelected = state.skills.some((s) => s.id === selectedSkill.id);
+              
+              if (isSelected) {
+                dispatch(setSkills(state.skills.filter((s) => s.id !== selectedSkill.id)));
+              } else {
+                dispatch(setSkills([...state.skills, selectedSkill]));
+              }
+            }}
           />
         </div>
         <div className="quiz__right-col">
@@ -59,9 +86,10 @@ export function QuizLobbyPage() {
             items={complexity}
             title={"Сложность"}
             limit={4}
-            listType={"complexity"}
-            selectedValue={state.complexity}
-            onSelect={(item) => dispatch(setComplexity(item))}
+            selectedValues={state.complexity ? [String(state.complexity)] : []}
+            onSelect={(value) => {
+              dispatch(setComplexity(value));
+            }}
           />
           <QuestionCounter
             count={state.qtyQuestions}

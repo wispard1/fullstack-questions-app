@@ -1,62 +1,60 @@
 import { useState } from "react";
-import { FilterButton } from "../filter-button/FilterButton";
+import { FilterButton } from "../filter-button";
 import type { SelectOption } from "@/shared/types";
+import "./CollapsibleList.css"; 
 
-type ListType = "skill" | "spec" | "complexity" | "rate";
-
-export interface CollapsibleListProps {
-  title: string;
+interface CollapsibleListProps {
   items: SelectOption[];
+  title: string;
   limit?: number;
-  listType: ListType;
   showIcon?: boolean;
-  selectedValue?: SelectOption | SelectOption[] | null;
-  onSelect?: (item: SelectOption) => void;
+  selectedValues?: (string | number)[]; 
+  onSelect: (id: string) => void;
 }
 
-export function CollapsibleList({
-  title,
-  items,
-  limit = 6,
-  listType,
+export function CollapsibleList({ 
+  items, 
+  title, 
+  limit = 5, 
   showIcon = false,
-  selectedValue,
-  onSelect,
+  selectedValues = [],
+  onSelect
 }: CollapsibleListProps) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const visibleItems = isExpanded ? items : items.slice(0, limit);
-  const conteinerClass =
-    listType === "skill" ? "skills_container" : "specs_container";
 
   return (
-    <>
-      <p className="title_sider_main">{title}</p>
-      <div className={conteinerClass}>
+    <div className="collapsible-list">
+      <h4 className="collapsible-list__title">{title}</h4>
+      
+      <ul className="collapsible-list__items">
         {visibleItems.map((item) => {
-          const isActive = Array.isArray(selectedValue)
-            ? selectedValue.some((value) => value.id === item.id)
-            : selectedValue?.id === item.id;
-
+          const value = String(item.id);
+          const isActive = selectedValues.map(String).includes(value);
+          
           return (
-            <FilterButton
-              key={item.id}
-              title={item.title}
-              icon={showIcon}
-              active={isActive}
-              onClick={() => onSelect?.(item)}
-            />
+            <li key={value} className="collapsible-list__item">
+              <FilterButton
+                title={item.title}
+                icon={showIcon}
+                active={isActive}
+                onClick={() => onSelect(value)}
+              />
+            </li>
           );
         })}
-      </div>
+      </ul>
+
       {items.length > limit && (
-        <button
-          onClick={() => setIsExpanded((prev) => !prev)}
-          className="show_spec"
+        <button 
+          type="button" 
+          className="collapsible-list__toggle" 
+          onClick={() => setIsExpanded(!isExpanded)}
         >
-          {isExpanded ? "Скрыть" : "Поcмотреть все"}
+          {isExpanded ? "Скрыть" : "Посмотреть все"}
         </button>
       )}
-    </>
+    </div>
   );
 }

@@ -3,4 +3,5 @@ export interface SelectOption {
   title: string;
   slug?: string;
   icon?: boolean;
+  imageSrc?: string;
 }

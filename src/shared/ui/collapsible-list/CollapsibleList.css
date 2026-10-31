@@ -1,0 +1,39 @@
+.collapsible-list__title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #1a1a1a;
+  margin-top: 20px;
+}
+
+/* Контейнер для кнопок */
+.collapsible-list__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.collapsible-list__items li {
+  display: inline-flex; 
+  width: auto;
+}
+
+.collapsible-list__toggle {
+  background: none;
+  border: none;
+  color: #7b61ff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.collapsible-list__toggle:hover {
+  text-decoration: underline;
+}

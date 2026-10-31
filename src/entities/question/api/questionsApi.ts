@@ -1,40 +1,55 @@
-import { baseApi } from "../../../app/store/baseApi";
+import { baseApi } from "@/app/store/baseApi";
 import type { Question, QuestionDetail } from "../model/types";
 
-const normalizeFn = (response: { data: Question[] }) => {
-  return response.data.map((item: string | Question) => {
-    if (typeof item === "string") {
-      return { id: item, title: item };
-    }
-    return item;
-  });
-};
+export interface QuestionsResponse {
+  total: number;
+  page: number;
+  limit: number;
+  data: Question[];
+}
+
+export interface GetQuestionsParams {
+  page?: number;
+  specializationId?: string;
+  skills?: string[];
+  complexity?: string;
+  rate?: string;
+  title?: string;
+}
 
 export const questionsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getPublicQuestions: builder.query({
-      query: (page) => `questions/public-questions?page=${page}`,
-      transformResponse: normalizeFn,
+    getPublicQuestions: builder.query<QuestionsResponse, GetQuestionsParams>({
+      query: (params) => ({
+        url: "questions/public-questions",
+        params: {
+          page: params.page || 1,
+          specializationId: params.specializationId || undefined,
+          skills: params.skills?.length ? params.skills.join(",") : undefined,
+          complexity: params.complexity || undefined,
+          rate: params.rate || undefined,
+        },
+      }),
       providesTags: ["Questions"],
     }),
-    fetchQuestionById: builder.query<QuestionDetail, number>({
-      query: (id) => `questions/public-questions/${id}`,
-      // transformResponse: normalizeFn,
-      providesTags: ["Questions"],
-    }),
-    findQuestionsByKeyword: builder.query({
+    findQuestionsByKeyword: builder.query<QuestionsResponse, GetQuestionsParams>({
       query: (params) => ({
         url: "questions/filter/keywords",
         params: {
-          page: params.page,
-          title: params.title,
+          page: params.page || 1,
+          title: params.title || undefined,
+          specializationId: params.specializationId || undefined,
+          complexity: params.complexity || undefined,
+          rate: params.rate || undefined,
         },
       }),
-      transformResponse: normalizeFn,
+      providesTags: ["Questions"],
+    }),
+    fetchQuestionById: builder.query<QuestionDetail, number | string>({
+      query: (id) => `questions/public-questions/${id}`,
       providesTags: ["Questions"],
     }),
   }),
-
   overrideExisting: false,
 });
 
