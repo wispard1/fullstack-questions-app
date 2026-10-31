@@ -1,0 +1,11 @@
+.main_btn {
+  min-width: 120px;
+  height: 48px;
+  padding: 0 25px;
+  background-color: #6a0bff;
+  border-style: none;
+  border-radius: 12px;
+  color: white;
+  font-size: large;
+  cursor: pointer;
+}

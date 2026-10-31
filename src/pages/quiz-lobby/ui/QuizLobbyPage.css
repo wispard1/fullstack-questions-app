@@ -1,0 +1,29 @@
+.quiz_container {
+  width: 1216px;
+  height: 518px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz__row {
+  display: flex;
+}
+
+.quiz__right-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.specsAndSkills {
+  width: 820px;
+}
+
+.btn__start {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}

@@ -1,0 +1,70 @@
+.question_item {
+  width: 765px;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 12px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  position: relative;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(106, 99, 118, 0.1);
+}
+
+.question_header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.question::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 50%;
+  background-color: #5533ff;
+  width: 8px;
+  height: 8px;
+  margin-right: 10px;
+}
+
+.question_icon {
+  margin-left: auto;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.answer {
+  font-size: 18px;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+}
+
+.link_answer {
+  align-self: flex-end;
+  margin-top: 20px;
+  color: #5533ff;
+  font-weight: 500;
+}
+
+.link_answer:hover {
+  text-decoration: none;
+}
+
+.link_answer::after {
+  content: "";
+  display: inline-block;
+  background-image: url("https://img.icons8.com/ios-filled/50/5533ff/long-arrow-right.png");
+  background-size: contain;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}

@@ -1,0 +1,81 @@
+.question_container {
+  width: 804px;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 12px;
+  margin-bottom: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  position: relative;
+  background: #ffffff;
+  box-shadow: 0px 4px 10px rgba(106, 99, 118, 0.1);
+}
+
+.question_container:first-child {
+  margin-top: 0px;
+}
+
+.question_container pre {
+  overflow-x: auto;
+}
+
+.main_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn_back {
+  border: none;
+  background-color: #f4f4f4;
+  color: #5533ff;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.btn_back:hover {
+  text-decoration-line: underline;
+}
+
+.btn_back::before {
+  content: "";
+  display: inline-block;
+  background-image: url("https://img.icons8.com/ios/50/back--v1.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  width: 15px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.flex_container {
+  display: flex;
+  gap: 30px;
+}
+
+.title_sider {
+  opacity: 0.8;
+  /* margin-top: 20px; */
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.keyword {
+  color: #5533ff;
+}
+
+.keywords_container {
+  display: flex;
+  gap: 10px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}

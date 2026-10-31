@@ -1,0 +1,1 @@
+export { useGetSpecsQuery } from "./specsApi";

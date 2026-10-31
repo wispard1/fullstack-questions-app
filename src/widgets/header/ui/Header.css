@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  background-color: #ffffff;
+  padding: 0 20px;
+}
+
+.container_logo {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.header_logo {
+  width: 33px;
+  height: 33px;
+  cursor: pointer;
+}
+
+.list_links {
+  display: flex;
+  gap: 20px;
+}
+
+.list_links li > a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.container_buttons {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  .list_links {
+    gap: 12px;
+  }
+
+  .list_links li > a {
+    font-size: 16px;
+  }
+}
