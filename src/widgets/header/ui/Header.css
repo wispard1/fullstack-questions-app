@@ -12,7 +12,12 @@
   align-items: center;
   gap: 5px;
   text-decoration: none;
-  color: "inherit";
+  color: black;
+}
+
+.container_logo:hover {
+  text-decoration: none;
+  color: black;
 }
 
 .header_logo {
