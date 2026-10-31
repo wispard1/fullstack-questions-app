@@ -7,10 +7,10 @@ export function SearchQuestionsList() {
   const query = searchParams.get("q") || "";
   const page = Number(searchParams.get("page")) || 1;
 
-  const { data, isLoading } = useFindQuestionsByKeywordQuery(
+  const { data: response, isLoading } = useFindQuestionsByKeywordQuery(
     {
       page,
-      searchValue: query,
+      title: query,
     },
     {
       skip: query === "",
@@ -19,8 +19,11 @@ export function SearchQuestionsList() {
 
   if (isLoading) return <div>Загрузка...</div>;
   if (query === "") return <div>Введите слово для поиска</div>;
-  if (data?.length === 0)
+  
+  const questions = response?.data || [];
+
+  if (questions.length === 0)
     return <div>По вашему запросу ничего не найдено</div>;
 
-  return <QuestionList questions={data || []} />;
+  return <QuestionList questions={questions} />;
 }
