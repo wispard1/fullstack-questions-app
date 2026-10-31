@@ -14,4 +14,4 @@ npm install
 npm run dev
 
 ## Деплой
-https://your-vercel-link.vercel.app
+https://fullstack-questions-app.vercel.app/
