@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 
 export function useDebounce(
   callback: (value: string) => void,
@@ -20,5 +20,10 @@ export function useDebounce(
     clearTimeout(timerId.current);
   }, []);
 
+  useEffect(() => {
+    return () => {
+      clearInterval(timerId.current);
+    };
+  }, []);
   return { debouncedCallback, clear };
 }

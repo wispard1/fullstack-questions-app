@@ -7,6 +7,12 @@ export function SearchInput() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentQuery = searchParams.get("q") || "";
   const [value, setValue] = useState<string>(currentQuery);
+  const [prevQuery, setPrevQuery] = useState<string>(currentQuery);
+
+  if (currentQuery !== prevQuery) {
+    setPrevQuery(currentQuery);
+    setValue(currentQuery);
+  }
 
   const updateUrl = (query: string) => {
     const newParams = new URLSearchParams(searchParams);
@@ -49,7 +55,6 @@ export function SearchInput() {
         </svg>
       </div>
       <input
-        key={currentQuery}
         value={value}
         onChange={handleOnChange}
         type="text"
