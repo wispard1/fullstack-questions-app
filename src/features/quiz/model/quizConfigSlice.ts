@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { QuizConfigState } from "./types";
-
+import type { SelectOption } from "@/shared/types";
 
 const initialState: QuizConfigState = {
   spec: null,
@@ -13,10 +13,10 @@ export const quizConfigSlice = createSlice({
   name: "quizConfig",
   initialState,
   reducers: {
-    setSpec: (state, action) => {
+    setSpec: (state, action: PayloadAction<SelectOption | null>) => {
       state.spec = action.payload;
     },
-    setSkills: (state, action) => {
+    toggleSkill: (state, action: PayloadAction<SelectOption>) => {
       const isExist = state.skills.some(
         (skill) => skill.id === action.payload.id
       );
@@ -28,18 +28,14 @@ export const quizConfigSlice = createSlice({
         state.skills.push(action.payload);
       }
     },
-    setComplexity: (state, action) => {
+    setComplexity: (state, action: PayloadAction<SelectOption | null>) => {
       state.complexity = action.payload;
     },
-    setQtyQuestions: (state, action) => {
+    setQtyQuestions: (state, action: PayloadAction<number>) => {
       state.qtyQuestions = action.payload;
     },
   },
 });
 
-export const {
-  setSpec,
-  setSkills,
-  setComplexity,
-  setQtyQuestions,
-} = quizConfigSlice.actions;
+export const { setSpec, toggleSkill, setComplexity, setQtyQuestions } =
+  quizConfigSlice.actions;

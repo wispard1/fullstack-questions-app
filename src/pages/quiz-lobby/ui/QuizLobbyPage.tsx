@@ -57,7 +57,8 @@ export function QuizLobbyPage() {
             limit={5}
             selectedValues={getSelectedIds(state.spec)}
             onSelect={(id) => {
-              const selectedSpec = specs.find((s) => String(s.id) === id) || null;
+              const selectedSpec =
+                specs.find((s) => String(s.id) === id) || null;
               dispatch(setSpec(selectedSpec));
             }}
           />
@@ -68,16 +69,11 @@ export function QuizLobbyPage() {
             showIcon={true}
             selectedValues={getSelectedIds(state.skills)}
             onSelect={(id) => {
-              const selectedSkill = skills.find((s) => String(s.id) === id);
+              const selectedSkill = skills.find(
+                (s) => String(s.id) === id
+              );
               if (!selectedSkill) return;
-
-              const isSelected = state.skills.some((s) => s.id === selectedSkill.id);
-              
-              if (isSelected) {
-                dispatch(setSkills(state.skills.filter((s) => s.id !== selectedSkill.id)));
-              } else {
-                dispatch(setSkills([...state.skills, selectedSkill]));
-              }
+              dispatch(setSkills(selectedSkill));
             }}
           />
         </div>
@@ -86,9 +82,13 @@ export function QuizLobbyPage() {
             items={complexity}
             title={"Сложность"}
             limit={4}
-            selectedValues={state.complexity ? [String(state.complexity)] : []}
+            selectedValues={
+              state.complexity ? [String(state.complexity.id)] : []
+            }
             onSelect={(value) => {
-              dispatch(setComplexity(value));
+              const selectedComplexity =
+                complexity.find((c) => String(c.id) === value) || null;
+              dispatch(setComplexity(selectedComplexity));
             }}
           />
           <QuestionCounter
