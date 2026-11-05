@@ -1,4 +1,4 @@
-import { baseApi } from "@/app/store/baseApi";
+import { baseApi } from "@/shared/api/baseApi";
 import type { Skill } from "../model";
 
 export const skillsApi = baseApi.injectEndpoints({

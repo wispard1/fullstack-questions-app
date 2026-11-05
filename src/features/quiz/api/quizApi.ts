@@ -1,5 +1,5 @@
 import type { QuizParams, QuizResponse } from "../model";
-import { baseApi } from '@/app/store/baseApi'
+import { baseApi } from "@/shared/api/baseApi";
 
 export const quizApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -24,7 +24,5 @@ export const quizApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {
-  useGetQuizQuestionsQuery,
-  useSubmitQuizResultMutation,
-} = quizApi;
+export const { useGetQuizQuestionsQuery, useSubmitQuizResultMutation } =
+  quizApi;

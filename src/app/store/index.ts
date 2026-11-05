@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { baseApi } from "./baseApi";
+import { baseApi } from "@/shared/api";
 import { quizSlice } from "@/features/quiz/model/quizSlice";
 import { quizConfigSlice } from "@/features/quiz/model/quizConfigSlice";
 

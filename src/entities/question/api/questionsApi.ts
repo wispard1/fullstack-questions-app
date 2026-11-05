@@ -1,4 +1,4 @@
-import { baseApi } from "@/app/store/baseApi";
+import { baseApi } from "@/shared/api/baseApi";
 import type { Question, QuestionDetail } from "../model/types";
 
 export interface QuestionsResponse {
@@ -47,7 +47,5 @@ export const questionsApi = baseApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const {
-  useGetPublicQuestionsQuery,
-  useFetchQuestionByIdQuery,
-} = questionsApi;
+export const { useGetPublicQuestionsQuery, useFetchQuestionByIdQuery } =
+  questionsApi;
