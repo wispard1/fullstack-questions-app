@@ -16,7 +16,7 @@ export const quizConfigSlice = createSlice({
     setSpec: (state, action: PayloadAction<SelectOption | null>) => {
       state.spec = action.payload;
     },
-    toggleSkill: (state, action: PayloadAction<SelectOption>) => {
+    setToggleSkill: (state, action: PayloadAction<SelectOption>) => {
       const isExist = state.skills.some(
         (skill) => skill.id === action.payload.id
       );
@@ -37,5 +37,5 @@ export const quizConfigSlice = createSlice({
   },
 });
 
-export const { setSpec, toggleSkill, setComplexity, setQtyQuestions } =
+export const { setSpec, setToggleSkill, setComplexity, setQtyQuestions } =
   quizConfigSlice.actions;

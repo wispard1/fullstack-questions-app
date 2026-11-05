@@ -8,10 +8,11 @@ import { MainButton } from "@/shared/ui/main-button";
 import {
   setComplexity,
   setQtyQuestions,
-  setSkills,
+  setToggleSkill,
   setSpec,
-  type QuizConfigState,
+  resetQuiz,
 } from "@/features/quiz";
+import type { QuizConfigState } from "@/features/quiz";
 import { useNavigate } from "react-router-dom";
 import type { SelectOption } from "@/shared/types";
 
@@ -43,6 +44,7 @@ export function QuizLobbyPage() {
       alert("Выберите специализацию!");
       return;
     }
+    dispatch(resetQuiz());
     navigate("/quiz");
   }
 
@@ -73,7 +75,7 @@ export function QuizLobbyPage() {
                 (s) => String(s.id) === id
               );
               if (!selectedSkill) return;
-              dispatch(setSkills(selectedSkill));
+              dispatch(setToggleSkill(selectedSkill));
             }}
           />
         </div>

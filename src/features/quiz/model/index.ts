@@ -7,7 +7,7 @@ export type {
 
 export {
   setSpec,
-  setSkills,
+  setToggleSkill,
   setComplexity,
   setQtyQuestions,
 } from "./quizConfigSlice";
