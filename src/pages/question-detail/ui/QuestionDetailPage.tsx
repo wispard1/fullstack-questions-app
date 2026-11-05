@@ -43,11 +43,11 @@ export function QuestionDetailPage() {
             </div>
             <HTMLSection
               title="Краткий ответ"
-              content={question.shortAnswer}
+              html={question.shortAnswer}
             />
             <HTMLSection
               title="Длинный ответ"
-              content={question.longAnswer}
+              html={question.longAnswer}
             />
           </div>
           <div className="sider">
