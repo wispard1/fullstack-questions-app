@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
-    strictPort: true,
+    // strictPort: true,
     proxy: {
       "/api": {
         target: "https://api.yeatwork.ru",
@@ -18,7 +18,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
 });

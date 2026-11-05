@@ -1,10 +1,7 @@
 import type { Question } from "@/entities/question";
 import { QuestionCard } from "@/entities/question";
 import { Pagination } from "@/shared/ui/pagination";
-import {
-  useFindQuestionsByKeywordQuery,
-  useGetPublicQuestionsQuery,
-} from "@/entities/question";
+import { useGetPublicQuestionsQuery } from "@/entities/question";
 import "./Content.css";
 
 interface ContentProps {
@@ -19,42 +16,16 @@ interface ContentProps {
 }
 
 export function Content({ page, searchValue, filters }: ContentProps) {
-  const isSearching = Boolean(searchValue.trim());
+  const { data, isFetching, error } = useGetPublicQuestionsQuery({
+    page,
+    title: searchValue || undefined,
+    specializationId: filters.specializationId,
+    skills: filters.skills,
+    complexity: filters.complexity,
+    rate: filters.rate,
+  });
 
-  const {
-    data: publicData,
-    isFetching: isPublicFetching,
-    error: publicError,
-  } = useGetPublicQuestionsQuery(
-    {
-      page,
-      specializationId: filters.specializationId,
-      skills: filters.skills,
-      complexity: filters.complexity,
-      rate: filters.rate,
-    },
-    { skip: isSearching }
-  );
-
-  const {
-    data: searchData,
-    isFetching: isSearchFetching,
-    error: searchError,
-  } = useFindQuestionsByKeywordQuery(
-    {
-      page,
-      title: searchValue,
-      specializationId: filters.specializationId,
-      skills: filters.skills,
-      complexity: filters.complexity,
-      rate: filters.rate,
-    },
-    { skip: !isSearching }
-  );
-
-  const isFetching = isPublicFetching || isSearchFetching;
-  const error = publicError || searchError;
-  const questions = (isSearching ? searchData : publicData)?.data || [];
+  const questions = data?.data || [];
 
   return (
     <div className="main_content">
