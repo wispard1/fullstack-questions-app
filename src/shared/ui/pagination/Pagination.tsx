@@ -5,14 +5,12 @@ const pages = [1, 2, 3, 4, 5];
 
 export function Pagination() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const searchValue = searchParams.get("q") || "";
   const page = Number(searchParams.get("page") || "1");
 
   function setPage(newPage: number) {
-    setSearchParams({
-      page: String(newPage),
-      q: searchValue,
-    });
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("page", String(newPage));
+    setSearchParams(newParams);
   }
 
   return (

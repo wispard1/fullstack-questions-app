@@ -9,7 +9,14 @@ export function SearchInput() {
   const [value, setValue] = useState<string>(currentQuery);
 
   const updateUrl = (query: string) => {
-    setSearchParams({ q: query, page: "1" });
+    const newParams = new URLSearchParams(searchParams);
+    if (query) {
+      newParams.set("q", query);
+    } else {
+      newParams.delete("q");
+    }
+    newParams.set("page", "1");
+    setSearchParams(newParams);
   };
 
   const { debouncedCallback, clear } = useDebounce(updateUrl, 1000);
@@ -17,7 +24,11 @@ export function SearchInput() {
   function handleClear() {
     clear();
     setValue("");
-    setSearchParams({ page: "1" });
+
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete("q");
+    newParams.set("page", "1");
+    setSearchParams(newParams);
   }
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
